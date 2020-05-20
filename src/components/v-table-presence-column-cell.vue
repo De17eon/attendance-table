@@ -4,36 +4,41 @@
         @click.prevent="handlerCell"
         class="v-table-cell"
         :class="{
-          'v-table-cell__novisit': visit == 'n', 
-          'v-table-cell__visit': visit == 'y',
-          'v-table-cell_reason': visit == 'r'
+          'v-table-cell__novisit': сellValue == 'n', 
+          'v-table-cell__visit': сellValue == 'y',
+          'v-table-cell_reason': сellValue == 'r'
         }"
       ></div>
   </div>
 </template>
 
+
+
 <script>
+import {mapGetters} from 'vuex'
+
 export default {
   name: 'v-table-presence-column-cell',
   props: ['studentN', 'columnN'],
-  data() {
-    return {
-      visit: 'n',
-      counterClick: 0, 
+  computed: {
+    ...mapGetters([
+      'VISIT_IN_CELL'
+    ]),
+    cellData() {
+      return {
+        columnN: this.columnN,
+        studentN: this.studentN
+      }
+    },
+    сellValue(){
+      return this.VISIT_IN_CELL(this.cellData)
     }
   },
   methods: {
     handlerCell() {
-      const values = ['n', 'y', 'r']
-      this.counterClick = (this.counterClick + 1) % 3
-      this.visit = values[this.counterClick]
-
-      const cellData = {
-        column: this.columnN,
-        student: this.studentN,
-        visit: this.visit
-      }
-      this.$store.commit('ChangeCellValue', cellData)
+      // console.log('this.cellData', this.cellData)
+      // console.log('this.сellValue', this.сellValue)
+      this.$store.commit('ChangeCellValue', this.cellData)
     }
   }
 }
@@ -43,8 +48,7 @@ export default {
   .v-table-presence-column-cell {
     display: flex;
     height: 25px;
-    min-width: 50px;
-    width: 50px;
+    width: 100%;
     padding: 2px;
     border: none;
     border-bottom: 1px solid silver;

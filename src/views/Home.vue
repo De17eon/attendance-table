@@ -33,8 +33,8 @@
           </div>
           <button type="button" class="btn my-gray mr-2 mb-2">Применить</button>
           <button type="button" @click.prevent="clickTemplate" class="btn my-gray mr-2 mb-2">Шаблон</button>
-          <button type="button" class="btn my-gray mr-2 mb-2">Очистить всё</button>
-          <button type="button" class="btn my-gray mr-2 mb-2">Перености с занятия</button>
+          <button type="button" @click.prevent="clickClear" class="btn my-gray mr-2 mb-2">Очистить всё</button>
+          <button type="button" @click.prevent="clickTransfer" class="btn my-gray mr-2 mb-2">Перености с занятия</button>
           <button type="button" class="btn my-gray mr-2 mb-2">Отмена</button>
         </div>
       </div>
@@ -76,6 +76,12 @@ export default {
     },
     clickTemplate() {
       this.$store.commit('toActiveVisitTemplate')
+    },
+    clickClear() {
+      this.$store.commit('clearTable')
+    },
+    clickTransfer() {
+      this.$store.commit('toTransferColumn')
     }
   },
   beforeDestroy() {

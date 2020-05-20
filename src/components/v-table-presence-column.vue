@@ -38,6 +38,7 @@ export default {
   display: flex;
   flex-direction: column;
   width: 50px;
+  min-width: 50px;
   border-right: 1px solid silver;
   box-sizing: border-box;
 }
