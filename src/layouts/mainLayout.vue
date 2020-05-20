@@ -14,7 +14,6 @@ export default {
     vNavbar,
   },
   async mounted() {
-    console.log('test')
     if (!Object.keys(this.$store.getters.PROFILE).length) {
       await this.$store.dispatch('fetchProfile')
     }

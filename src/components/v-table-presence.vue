@@ -14,48 +14,44 @@ import vTablePresenceStudents from './v-table-presence-students'
 import vTablePresenceActiveZone from './v-table-presence-active-zone'
 
 export default {
-    name: 'v-table-presence',
-    components: {
-      vTablePresenceHeader,
-      vTablePresenceStudents,
-      vTablePresenceActiveZone
-    }
-
+  name: 'v-table-presence',
+  components: {
+    vTablePresenceHeader,
+    vTablePresenceStudents,
+    vTablePresenceActiveZone
+  }
 }
 </script>
 
 <style>
+.v-table-presence {
+  margin: 20px;
+  overflow: auto;
+  cursor: pointer;
+  box-sizing: border-box;
+  color: rgb(34, 34, 34);
+}
+.v-table-presence-header__wrap {
+  display: flex;
+}
+@media (max-width: 767px) {
   .v-table-presence {
-    margin: 20px;
-    overflow: auto;
+    width: 470px;
   }
-  .v-table-presence-header__wrap {
-    display: flex;
+}
+@media (min-width: 768px) {
+  .v-table-presence {
+    width: 700px;
   }
-
-  @media (max-width: 767px) {
-    .v-table-presence {
-        width: 470px;
-    }
+}
+@media (min-width: 992px) {
+  .v-table-presence {
+    width: 900px;
   }
-
-  @media (min-width: 768px) {
-    .v-table-presence {
-        width: 700px;
-    }
+}
+@media (min-width: 1200px) {
+  .v-table-presence {
+    width: 1080px;
   }
-
-
-  @media (min-width: 992px) {
-      .v-table-presence {
-          width: 900px;
-      }
-  }
-
-
-  @media (min-width: 1200px) {
-      .v-table-presence {
-          width: 1080px;
-      }
-  }
+}
 </style>

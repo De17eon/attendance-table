@@ -31,9 +31,8 @@
                 <option value="20">Неделя 20: 01.06.20</option>
             </select>
           </div>
-
           <button type="button" class="btn my-gray mr-2 mb-2">Применить</button>
-          <button type="button" class="btn my-gray mr-2 mb-2">Шаблон</button>
+          <button type="button" @click.prevent="clickTemplate" class="btn my-gray mr-2 mb-2">Шаблон</button>
           <button type="button" class="btn my-gray mr-2 mb-2">Очистить всё</button>
           <button type="button" class="btn my-gray mr-2 mb-2">Перености с занятия</button>
           <button type="button" class="btn my-gray mr-2 mb-2">Отмена</button>
@@ -50,39 +49,39 @@
 import vTablePresence from './../components/v-table-presence'
 
 export default {
-    name: 'v-wrapper',
-    components: {
-        vTablePresence
-    },
-    data() {
-        return {
-            windowWidth: 0,
-            windowHeight: 0,
-        }
-    },
-    mounted() {
-        this.$nextTick(function() {
-            window.addEventListener('resize', this.getWindowWidth);
-            window.addEventListener('resize', this.getWindowHeight);
-
-            this.getWindowWidth()
-            this.getWindowHeight()
-        })
-    },
-    methods: {
-        getWindowWidth() {
-            this.windowWidth = document.documentElement.clientWidth;
-        },
-
-        getWindowHeight() {
-            this.windowHeight = document.documentElement.clientHeight;
-        }
-    },
-    beforeDestroy() {
-        window.removeEventListener('resize', this.getWindowWidth);
-        window.removeEventListener('resize', this.getWindowHeight);
+  name: 'v-wrapper',
+  components: {
+    vTablePresence
+  },
+  data() {
+    return {
+      windowWidth: 0,
+      windowHeight: 0,
     }
-
+  },
+  mounted() {
+    this.$nextTick(function() {
+      window.addEventListener('resize', this.getWindowWidth);
+      window.addEventListener('resize', this.getWindowHeight);
+      this.getWindowWidth()
+      this.getWindowHeight()
+    })
+  },
+  methods: {
+    getWindowWidth() {
+      this.windowWidth = document.documentElement.clientWidth;
+    },
+    getWindowHeight() {
+      this.windowHeight = document.documentElement.clientHeight;
+    },
+    clickTemplate() {
+      this.$store.commit('toActiveVisitTemplate')
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.getWindowWidth);
+    window.removeEventListener('resize', this.getWindowHeight);
+  }
 }
 </script>
 
