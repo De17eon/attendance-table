@@ -29,6 +29,7 @@
 
 <style>
 .v-table-presence-header-cell {
+  cursor: pointer;
   display: flex;
   justify-content: flex-end;
   border-left: 1px solid silver;

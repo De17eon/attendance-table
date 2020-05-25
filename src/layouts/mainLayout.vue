@@ -24,7 +24,7 @@ export default {
 <style>
 @import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
 .bubun-ligth-text {
-  color: #ffffffee !important;
+  color: #ffffffbb !important;
 }
 .bubun-background {
   background: #ffffff;

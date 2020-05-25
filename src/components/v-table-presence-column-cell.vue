@@ -36,8 +36,6 @@ export default {
   },
   methods: {
     handlerCell() {
-      // console.log('this.cellData', this.cellData)
-      // console.log('this.сellValue', this.сellValue)
       this.$store.commit('ChangeCellValue', this.cellData)
     }
   }
@@ -46,6 +44,7 @@ export default {
 
 <style>
   .v-table-presence-column-cell {
+    cursor: pointer;
     display: flex;
     height: 25px;
     width: 100%;
@@ -65,6 +64,6 @@ export default {
     background-color: rgb(255, 255, 255);
   }
   .v-table-cell_reason {
-    background-color: rgb(238, 230, 209);
+    background-color: rgb(197, 197, 197);
   }
 </style>

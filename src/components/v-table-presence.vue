@@ -27,7 +27,6 @@ export default {
 .v-table-presence {
   margin: 20px;
   overflow: auto;
-  cursor: pointer;
   box-sizing: border-box;
   color: rgb(34, 34, 34);
 }

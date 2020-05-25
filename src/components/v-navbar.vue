@@ -2,18 +2,20 @@
   <nav class="navbar navbar-light bg-dark">
     <div class="container">
       <div class="row">
-        <div class="col d-flex p-2">
-          <router-link to="/app" class="bubun-light navbar-brand mb-0 h1 bubun-ligth-text">Таблица посещаемости</router-link>
+        <div class="my-header-link">
+          <router-link to="/app" class="mb-0 px-2 bubun-ligth-text my-link">Приложение</router-link>
         </div>
-        <div class="col d-flex p-2">
-          <router-link to="/news" class="bubun-light navbar-brand mb-0 h1 bubun-ligth-text">Лента новостей</router-link>
+        <div class="my-header-link">
+          <router-link to="/news" class="mb-0 px-2 bubun-ligth-text my-link">Новости</router-link>
         </div>
-        <div class="col d-flex p-2">
-          <router-link to="/profile" class="bubun-light navbar-brand mb-0 h1 bubun-ligth-text">Профиль</router-link>
+        <div class="my-header-link">
+          <router-link to="/profile" class="px-2 mb-0 bubun-ligth-text my-link">Профиль</router-link>
         </div>
-        <div class="col d-flex p-2">
-          <a @click.prevent="logout" class="bubun-light navbar-brand mb-0 h1 bubun-ligth-text">Выйти</a>
-        </div>     
+      </div>
+      <div class="row">
+        <div class="my-header-link mr-2">
+          <a @click.prevent="logout" class="px-2 mb-0 bubun-ligth-text my-link">Выйти</a>
+        </div> 
       </div>
     </div>
   </nav>  
@@ -32,5 +34,28 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
 
+.my-header-link {
+  font-family: 'Comfortaa', sans-serif;
+  transition: ease-out .1s;
+  border-radius: 2px;
+  font-size: 1.15rem;
+  cursor: pointer;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+.my-header-link:hover {
+  background-color:#4ac8e71c;
+  transition: ease-in .2s;
+  border-radius: 5px;
+  text-decoration: none;
+}
+.my-link {
+  text-decoration: none !important;
+}
+.my-link:hover {
+  text-decoration: none !important;
+}
 </style>

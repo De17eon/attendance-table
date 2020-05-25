@@ -23,9 +23,10 @@ export default {
       'VISITS',
     ]),
     table() {
-      return this.VISITS['week0']
+      console.log('v-table-presence-active-zone this.VISITS', this.VISITS)
+      return this.VISITS
     }
-  },
+  }
 }
 </script>
 

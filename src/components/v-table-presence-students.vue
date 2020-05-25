@@ -19,6 +19,7 @@ export default {
 
 <style>
 .v-table-presence-students {
+  cursor: pointer;
   display: flex;
   flex-direction: column;
   min-width: 200px;

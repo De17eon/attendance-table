@@ -1,14 +1,13 @@
 <template>
   <div>
     <div class="container bubun-background mb-3 mt-2">
-      <div class="row mt-4 mb-4">
+      <div class="row mt-3 ml-3">
         <div class="col-md-7">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
                 <label class="input-group-text" for="inputGroupSelect01">Выбор недели: </label>
             </div>
             <select class="custom-select" id="inputGroupSelect01">
-                <option selected>Текущая неделя</option>
                 <option value="1">Неделя 1: 20.01.20</option>
                 <option value="2">Неделя 2: 27.01.20</option>
                 <option value="3">Неделя 3: 03.02.20</option>
@@ -27,53 +26,45 @@
                 <option value="16">Неделя 16: 04.05.20</option>
                 <option value="17">Неделя 17: 11.05.20</option>
                 <option value="18">Неделя 18: 18.05.20</option>
-                <option value="19">Неделя 19: 25.05.20</option>
+                <option value="19" selected>Неделя 19: 25.05.20</option>
                 <option value="20">Неделя 20: 01.06.20</option>
             </select>
           </div>
-          <button type="button" class="btn my-gray mr-2 mb-2">Применить</button>
+        </div>
+      </div>
+      <div class="row mb-3 ml-3">
+        <div class="col-md-12">
+          <button type="button" @click.prevent="saveToServer" class="btn my-gray mr-2 mb-2">Сохранить</button>
+          <button type="button" @click.prevent="loadOnServer" class="btn my-gray mr-2 mb-2">Отмена</button>
           <button type="button" @click.prevent="clickTemplate" class="btn my-gray mr-2 mb-2">Шаблон</button>
           <button type="button" @click.prevent="clickClear" class="btn my-gray mr-2 mb-2">Очистить всё</button>
           <button type="button" @click.prevent="clickTransfer" class="btn my-gray mr-2 mb-2">Перености с занятия</button>
-          <button type="button" class="btn my-gray mr-2 mb-2">Отмена</button>
         </div>
       </div>
-    </div>
-    <div class="container bubun-background">
-      <v-table-presence />
+      <v-table-loader v-if="loading" />
+      <v-table-presence v-else />
     </div>
   </div>
 </template>
 
 <script>
 import vTablePresence from './../components/v-table-presence'
+import vTableLoader from './../components/v-table-loader'
 
 export default {
   name: 'v-wrapper',
   components: {
-    vTablePresence
+    vTablePresence,
+    vTableLoader
   },
-  data() {
-    return {
-      windowWidth: 0,
-      windowHeight: 0,
-    }
-  },
-  mounted() {
-    this.$nextTick(function() {
-      window.addEventListener('resize', this.getWindowWidth);
-      window.addEventListener('resize', this.getWindowHeight);
-      this.getWindowWidth()
-      this.getWindowHeight()
-    })
+  data: () => ({
+    loading: true
+  }),
+  async mounted() {
+    await this.$store.dispatch('loadTable')
+    this.loading = false
   },
   methods: {
-    getWindowWidth() {
-      this.windowWidth = document.documentElement.clientWidth;
-    },
-    getWindowHeight() {
-      this.windowHeight = document.documentElement.clientHeight;
-    },
     clickTemplate() {
       this.$store.commit('toActiveVisitTemplate')
     },
@@ -82,13 +73,17 @@ export default {
     },
     clickTransfer() {
       this.$store.commit('toTransferColumn')
+    },
+    async saveToServer() {
+      await this.$store.dispatch('saveTable')
+    },
+    async loadOnServer() {
+      await this.$store.dispatch('loadTable')
     }
-  },
-  beforeDestroy() {
-    window.removeEventListener('resize', this.getWindowWidth);
-    window.removeEventListener('resize', this.getWindowHeight);
   }
 }
 </script>
+
+
 
 

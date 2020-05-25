@@ -17,10 +17,9 @@ export default {
       try {
         const uid = await dispatch('getUId')
         const info = (await firebase.database().ref(`users/${uid}/profile`).once('value')).val()
-        console.log(info)
         commit('setProfile', info)
       } catch (e) {
-        console.log('profile.js', e)
+        // console.log('profile.js', e)
       }
     }
   },

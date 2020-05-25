@@ -1,6 +1,5 @@
 <template>
   <div class="v-table-presence-empty-cell">
-    <h3>о</h3>
   </div>
 </template>
 

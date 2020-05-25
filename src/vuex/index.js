@@ -4,15 +4,17 @@ import vuex from 'vuex'
 import auth from './auth'
 import profile from './profile'
 
+import firebase from 'firebase/app'
+
 vue.use(vuex)
 
 let store = new vuex.Store({
   state: {
-    interfaceWeek: 'week0',
+    interfaceWeek: 'week1',
     activeColumn: '',
     transferColumn: '',
     waiting: '',
-    ArrayOfValuesCel: ['n', 'y', 'r'], 
+    arrayOfValuesCel: ['n', 'y', 'r'], 
     subjects: [
       {
         day_week: 1,
@@ -171,335 +173,7 @@ let store = new vuex.Store({
         name: 'Якимчук Артур Игоревич'
       },
     ],
-    weeks: {
-      week0: '1',
-      week1: '8',
-    },
     visits: {
-      week0: {
-        column01: {
-          student01: 'y',
-          student02: 'r',
-          student03: 'n',
-          student04: 'n',
-          student05: 'n',
-          student06: 'n',
-          student07: 'n',
-          student08: 'n',
-          student09: 'n',
-          student10: 'n',
-          student11: 'n',
-          student12: 'n',
-          student13: 'n',
-          student14: 'n',
-          student15: 'n',
-          student16: 'n',
-          student17: 'n',
-          student18: 'n',
-          student19: 'n',
-          student20: 'n',
-          student21: 'n',
-        },
-        column02: {
-          student01: 'n',
-          student02: 'n',
-          student03: 'n',
-          student04: 'n',
-          student05: 'n',
-          student06: 'n',
-          student07: 'n',
-          student08: 'n',
-          student09: 'n',
-          student10: 'n',
-          student11: 'n',
-          student12: 'n',
-          student13: 'n',
-          student14: 'n',
-          student15: 'n',
-          student16: 'n',
-          student17: 'n',
-          student18: 'n',
-          student19: 'n',
-          student20: 'n',
-          student21: 'n',
-        },
-        column03: {
-          student01: 'n',
-          student02: 'n',
-          student03: 'n',
-          student04: 'n',
-          student05: 'n',
-          student06: 'n',
-          student07: 'n',
-          student08: 'n',
-          student09: 'n',
-          student10: 'n',
-          student11: 'n',
-          student12: 'n',
-          student13: 'n',
-          student14: 'n',
-          student15: 'n',
-          student16: 'n',
-          student17: 'n',
-          student18: 'n',
-          student19: 'n',
-          student20: 'n',
-          student21: 'n',
-        },
-        column04: {
-          student01: 'n',
-          student02: 'n',
-          student03: 'n',
-          student04: 'n',
-          student05: 'n',
-          student06: 'n',
-          student07: 'n',
-          student08: 'n',
-          student09: 'n',
-          student10: 'n',
-          student11: 'n',
-          student12: 'n',
-          student13: 'n',
-          student14: 'n',
-          student15: 'n',
-          student16: 'n',
-          student17: 'n',
-          student18: 'n',
-          student19: 'n',
-          student20: 'n',
-          student21: 'n',
-        },
-        column05: {
-          student01: 'n',
-          student02: 'n',
-          student03: 'n',
-          student04: 'n',
-          student05: 'n',
-          student06: 'n',
-          student07: 'n',
-          student08: 'n',
-          student09: 'n',
-          student10: 'n',
-          student11: 'n',
-          student12: 'n',
-          student13: 'n',
-          student14: 'n',
-          student15: 'n',
-          student16: 'n',
-          student17: 'n',
-          student18: 'n',
-          student19: 'n',
-          student20: 'n',
-          student21: 'n',
-        },
-        column06: {
-          student01: 'n',
-          student02: 'n',
-          student03: 'n',
-          student04: 'n',
-          student05: 'n',
-          student06: 'n',
-          student07: 'n',
-          student08: 'n',
-          student09: 'n',
-          student10: 'n',
-          student11: 'n',
-          student12: 'n',
-          student13: 'n',
-          student14: 'n',
-          student15: 'n',
-          student16: 'n',
-          student17: 'n',
-          student18: 'n',
-          student19: 'n',
-          student20: 'n',
-          student21: 'n',
-        },
-        column07: {
-          student01: 'n',
-          student02: 'n',
-          student03: 'n',
-          student04: 'n',
-          student05: 'n',
-          student06: 'n',
-          student07: 'n',
-          student08: 'n',
-          student09: 'n',
-          student10: 'n',
-          student11: 'n',
-          student12: 'n',
-          student13: 'n',
-          student14: 'n',
-          student15: 'n',
-          student16: 'n',
-          student17: 'n',
-          student18: 'n',
-          student19: 'n',
-          student20: 'n',
-          student21: 'n',
-        },
-        column08: {
-          student01: 'n',
-          student02: 'n',
-          student03: 'n',
-          student04: 'n',
-          student05: 'n',
-          student06: 'n',
-          student07: 'n',
-          student08: 'n',
-          student09: 'n',
-          student10: 'n',
-          student11: 'n',
-          student12: 'n',
-          student13: 'n',
-          student14: 'n',
-          student15: 'n',
-          student16: 'n',
-          student17: 'n',
-          student18: 'n',
-          student19: 'n',
-          student20: 'n',
-          student21: 'n',
-        },
-        column09: {
-          student01: 'n',
-          student02: 'n',
-          student03: 'n',
-          student04: 'n',
-          student05: 'n',
-          student06: 'n',
-          student07: 'n',
-          student08: 'n',
-          student09: 'n',
-          student10: 'n',
-          student11: 'n',
-          student12: 'n',
-          student13: 'n',
-          student14: 'n',
-          student15: 'n',
-          student16: 'n',
-          student17: 'n',
-          student18: 'n',
-          student19: 'n',
-          student20: 'n',
-          student21: 'n',
-        },
-        column10: {
-          student01: 'n',
-          student02: 'n',
-          student03: 'n',
-          student04: 'n',
-          student05: 'n',
-          student06: 'n',
-          student07: 'n',
-          student08: 'n',
-          student09: 'n',
-          student10: 'n',
-          student11: 'n',
-          student12: 'n',
-          student13: 'n',
-          student14: 'n',
-          student15: 'n',
-          student16: 'n',
-          student17: 'n',
-          student18: 'n',
-          student19: 'n',
-          student20: 'n',
-          student21: 'n',
-        },
-        column11: {
-          student01: 'n',
-          student02: 'n',
-          student03: 'n',
-          student04: 'n',
-          student05: 'n',
-          student06: 'n',
-          student07: 'n',
-          student08: 'n',
-          student09: 'n',
-          student10: 'n',
-          student11: 'n',
-          student12: 'n',
-          student13: 'n',
-          student14: 'n',
-          student15: 'n',
-          student16: 'n',
-          student17: 'n',
-          student18: 'n',
-          student19: 'n',
-          student20: 'n',
-          student21: 'n',
-        },
-        column12: {
-          student01: 'n',
-          student02: 'n',
-          student03: 'n',
-          student04: 'n',
-          student05: 'n',
-          student06: 'n',
-          student07: 'n',
-          student08: 'n',
-          student09: 'n',
-          student10: 'n',
-          student11: 'n',
-          student12: 'n',
-          student13: 'n',
-          student14: 'n',
-          student15: 'n',
-          student16: 'n',
-          student17: 'n',
-          student18: 'n',
-          student19: 'n',
-          student20: 'n',
-          student21: 'n',
-        },
-        column13: {
-          student01: 'n',
-          student02: 'n',
-          student03: 'n',
-          student04: 'n',
-          student05: 'n',
-          student06: 'n',
-          student07: 'n',
-          student08: 'n',
-          student09: 'n',
-          student10: 'n',
-          student11: 'n',
-          student12: 'n',
-          student13: 'n',
-          student14: 'n',
-          student15: 'n',
-          student16: 'n',
-          student17: 'n',
-          student18: 'n',
-          student19: 'n',
-          student20: 'n',
-          student21: 'n',
-        },
-        column14: {
-          student01: 'n',
-          student02: 'n',
-          student03: 'n',
-          student04: 'n',
-          student05: 'n',
-          student06: 'n',
-          student07: 'n',
-          student08: 'n',
-          student09: 'n',
-          student10: 'n',
-          student11: 'n',
-          student12: 'n',
-          student13: 'n',
-          student14: 'n',
-          student15: 'n',
-          student16: 'n',
-          student17: 'n',
-          student18: 'n',
-          student19: 'n',
-          student20: 'n',
-          student21: 'n',
-        } 
-      },
       week1: {
         column01: {
           student01: 'n',
@@ -851,14 +525,13 @@ let store = new vuex.Store({
   },
   mutations: {
     ChangeCellValue(state, cellData) {
-      console.log('ChangeCellValue', cellData)
       const cur = state.visits[state.interfaceWeek][cellData.columnN][cellData.studentN]
-      const num = state.ArrayOfValuesCel.indexOf(cur)
-      state.visits[state.interfaceWeek][cellData.columnN][cellData.studentN] = state.ArrayOfValuesCel[(num + 1) % 3]
+      const num = state.arrayOfValuesCel.indexOf(cur)
+      state.visits[state.interfaceWeek][cellData.columnN][cellData.studentN] = state.arrayOfValuesCel[(num + 1) % 3]
     },
     ChangeActiveColumn(state, columnN) {
       if (state.waiting == 'transfer') {
-        
+
         let columnT = 'column'
         if (String(state.transferColumn).length == 1) {
           columnT += 0
@@ -911,9 +584,31 @@ let store = new vuex.Store({
         state.activeColumn = ''
         state.waiting = 'transfer'
       }
+    },
+    updateVisits(state, serverData) {
+      state.visits[state.interfaceWeek] = serverData
     }
   },
   actions: {
+    async saveTable() {
+      const weekN = this.getters.INTERFACE_WEEK
+      const v = this.getters.VISITS
+      console.log(v)
+      try {
+        await firebase.database().ref().child(`visits/${weekN}`).set(v)
+      } catch (e) { 
+        console.log('saveTable', e)
+      }
+    },
+    async loadTable({commit}) {
+      const weekN = this.getters.INTERFACE_WEEK
+      try {
+        const serverData = (await firebase.database().ref(`visits/${weekN}`).once('value')).val()
+        commit('updateVisits', serverData)
+      } catch (e) {
+        console.log('loadTable', e)
+      }
+    }
   },
   getters: {
     SUBJECTS(state) {
@@ -922,14 +617,17 @@ let store = new vuex.Store({
     STUDENTS(state){
       return state.students
     },
-    VISITS(state) {
-      return state.visits
-    },
     ACTIVECOLUMN(state) {
       return state.activeColumn
     },
     VISIT_IN_CELL: state => (dataN) => {
       return state.visits[state.interfaceWeek][dataN.columnN][dataN.studentN]
+    },
+    INTERFACE_WEEK(state) {
+      return state.interfaceWeek
+    },
+    VISITS(state) {
+      return state.visits[state.interfaceWeek]
     }
   },
   modules: {

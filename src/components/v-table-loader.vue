@@ -1,0 +1,68 @@
+<template>
+  <div class="my-wrap-loader">
+    <div class="loader">
+      <div class="l_main">
+        <div class="l_square"><span></span><span></span><span></span></div>
+        <div class="l_square"><span></span><span></span><span></span></div>
+        <div class="l_square"><span></span><span></span><span></span></div>
+        <div class="l_square"><span></span><span></span><span></span></div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'preloader'
+}
+</script>
+
+<style>
+.my-wrap-loader {
+  width: 100%;
+  height: 200px;
+}
+.loader {
+  height:100%;
+  width:100%;
+}
+.loader .l_main {
+  position: relative;
+  left: 15%;
+  top: 15%;
+  width:172px;
+  height:128px;
+  display: block;
+}
+@media (max-width:550px) {
+.loader{
+  -webkit-transform:scale(0.75);
+  transform:scale(0.75)
+}
+}
+@media (max-width:440px){.loader{-webkit-transform:scale(0.5);transform:scale(0.5)}}
+.l_square{position:relative}
+.l_square:nth-child(1){margin-left:0px}
+.l_square:nth-child(2){margin-left:44px}
+.l_square:nth-child(3){margin-left:88px}
+.l_square:nth-child(4){margin-left:132px}
+.l_square span{position:absolute;top:0px;left:20px;height:36px;width:36px;border-radius:2px;background-color:rgb(153, 202, 153)}
+.l_square span:nth-child(1){top:0px}
+.l_square span:nth-child(2){top:44px}
+.l_square span:nth-child(3){top:88px}
+.l_square:nth-child(1) span{-webkit-animation:animsquare1 2s infinite ease-in;animation:animsquare1 2s infinite ease-in}
+.l_square:nth-child(2) span{-webkit-animation:animsquare2 2s infinite ease-in;animation:animsquare2 2s infinite ease-in}
+.l_square:nth-child(3) span{-webkit-animation:animsquare3 2s infinite ease-in;animation:animsquare3 2s infinite ease-in}
+.l_square:nth-child(4) span{-webkit-animation:animsquare4 2s infinite ease-in;animation:animsquare4 2s infinite ease-in}
+.l_square span:nth-child(1){-webkit-animation-delay:0.00s;animation-delay:0.00s}
+.l_square span:nth-child(2){-webkit-animation-delay:0.15s;animation-delay:0.15s}
+.l_square span:nth-child(3){-webkit-animation-delay:0.30s;animation-delay:0.30s}
+@-webkit-keyframes animsquare1{0%,5%,95%,100%{-webkit-transform:translate(0px,0px) rotate(0deg);transform:translate(0px,0px) rotate(0deg)}30%,70%{-webkit-transform:translate(-40px,0px) rotate(-90deg);transform:translate(-40px,0px) rotate(-90deg)}}
+@keyframes animsquare1{0%,5%,95%,100%{-webkit-transform:translate(0px,0px) rotate(0deg);transform:translate(0px,0px) rotate(0deg)}30%,70%{-webkit-transform:translate(-40px,0px) rotate(-90deg);transform:translate(-40px,0px) rotate(-90deg)}}
+@-webkit-keyframes animsquare2{0%,10%,90%,100%{-webkit-transform:translate(0px,0px) rotate(0deg);transform:translate(0px,0px) rotate(0deg)}35%,65%{-webkit-transform:translate(-40px,0px) rotate(-90deg);transform:translate(-40px,0px) rotate(-90deg)}}
+@keyframes animsquare2{0%,10%,90%,100%{-webkit-transform:translate(0px,0px) rotate(0deg);transform:translate(0px,0px) rotate(0deg)}35%,65%{-webkit-transform:translate(-40px,0px) rotate(-90deg);transform:translate(-40px,0px) rotate(-90deg)}}
+@-webkit-keyframes animsquare3{0%,15%,85%,100%{-webkit-transform:translate(0px,0px) rotate(0deg);transform:translate(0px,0px) rotate(0deg)}40%,60%{-webkit-transform:translate(-40px,0px) rotate(-90deg);transform:translate(-40px,0px) rotate(-90deg)}}
+@keyframes animsquare3{0%,15%,85%,100%{-webkit-transform:translate(0px,0px) rotate(0deg);transform:translate(0px,0px) rotate(0deg)}40%,60%{-webkit-transform:translate(-40px,0px) rotate(-90deg);transform:translate(-40px,0px) rotate(-90deg)}}
+@-webkit-keyframes animsquare4{0%,20%,80%,100%{-webkit-transform:translate(0px,0px) rotate(0deg);transform:translate(0px,0px) rotate(0deg)}45%,55%{-webkit-transform:translate(-40px,0px) rotate(-90deg);transform:translate(-40px,0px) rotate(-90deg)}}
+@keyframes animsquare4{0%,20%,80%,100%{-webkit-transform:translate(0px,0px) rotate(0deg);transform:translate(0px,0px) rotate(0deg)}45%,55%{-webkit-transform:translate(-40px,0px) rotate(-90deg);transform:translate(-40px,0px) rotate(-90deg)}}
+</style>
