@@ -3,7 +3,6 @@
     <div class="container bubun-background mb-3 mt-2">
       <div class="row justify-content-center">
         <div class="col-md-7">
-
           <div class="my-post px-1 py-3 mb-3">
             <div class="mx-4 my-2 py-1 my-news-head d-flex flex-wrap align-content-center">
               <img :src="require('../assets/images/dl-light.png')" class="mr-3" alt="">
@@ -14,7 +13,6 @@
               <p>Сегодня праздник! Все данные залиты на реальную базу данных. Была проблема с тем, что vuex не хочет работать с данными пришедшими с сервера. Решение - дефолтное задание объекта с ожидаемой структурой на фронте.</p>
             </div>
           </div>
-
           <div class="my-post px-1 py-3 mb-3">
             <div class="mx-4 my-2 py-1 my-news-head d-flex flex-wrap align-content-center">
               <img :src="require('../assets/images/dl-light.png')" class="mr-3" alt="">
@@ -25,7 +23,6 @@
               <p>Сегодня дизайн воплотили в жизнь</p>
             </div>
           </div>
-
           <div class="my-post px-1 py-3 mb-3">
             <div class="mx-4 my-2 py-1 my-news-head d-flex flex-wrap align-content-center">
               <img :src="require('../assets/images/dl-light.png')" class="mr-3" alt="">
@@ -36,7 +33,6 @@
               <p>Сегодня был придуман дизайн.</p>
             </div>
           </div>
-
         </div>
       </div>
     </div>

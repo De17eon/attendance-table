@@ -21,8 +21,8 @@ export default new VueRouter({
       component: () => import('@/views/Home.vue')
     },
     {
-      path: '/login',
-      name: 'login',
+      path: '/',
+      name: '',
       meta: {layout: 'empty'},
       component: () => import('@/views/Login.vue')
     },

@@ -26,8 +26,8 @@
                 <option value="16">Неделя 16: 04.05.20</option>
                 <option value="17">Неделя 17: 11.05.20</option>
                 <option value="18">Неделя 18: 18.05.20</option>
-                <option value="19" selected>Неделя 19: 25.05.20</option>
-                <option value="20">Неделя 20: 01.06.20</option>
+                <option value="19">Неделя 19: 25.05.20</option>
+                <option value="20" selected>Неделя 20: 01.06.20</option>
             </select>
           </div>
         </div>
@@ -38,7 +38,9 @@
           <button type="button" @click.prevent="loadOnServer" class="btn my-gray mr-2 mb-2">Отмена</button>
           <button type="button" @click.prevent="clickTemplate" class="btn my-gray mr-2 mb-2">Шаблон</button>
           <button type="button" @click.prevent="clickClear" class="btn my-gray mr-2 mb-2">Очистить всё</button>
-          <button type="button" @click.prevent="clickTransfer" class="btn my-gray mr-2 mb-2">Перености с занятия</button>
+          <button type="button" @click.prevent="clickClearColumn" class="btn my-gray mr-2 mb-2">Очистить</button>
+          <button type="button" @click.prevent="clickTransfer" class="btn my-gray mr-2 mb-2">Запомнить</button>
+          <button type="button" @click.prevent="toFill" class="btn my-gray mr-2 mb-2">Заполнить по строке</button>
         </div>
       </div>
       <v-table-loader v-if="loading" />
@@ -71,8 +73,14 @@ export default {
     clickClear() {
       this.$store.commit('clearTable')
     },
+    clickClearColumn() {
+      this.$store.commit('clickClearColumn')
+    },
     clickTransfer() {
       this.$store.commit('toTransferColumn')
+    },
+    toFill() {
+      this.$store.commit('toFill')
     },
     async saveToServer() {
       await this.$store.dispatch('saveTable')
@@ -83,7 +91,6 @@ export default {
   }
 }
 </script>
-
 
 
 

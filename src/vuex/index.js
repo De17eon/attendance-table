@@ -8,12 +8,22 @@ import firebase from 'firebase/app'
 
 vue.use(vuex)
 
+function createColumnName(num) {
+  let name = 'column'
+  if (String(num).length == 1) {
+    name += 0
+  }
+  name += num
+  return name
+}
+
 let store = new vuex.Store({
   state: {
     interfaceWeek: 'week1',
     activeColumn: '',
+    manyActiveColumn: [],
     transferColumn: '',
-    waiting: '',
+    // waiting: '',
     arrayOfValuesCel: ['n', 'y', 'r'], 
     subjects: [
       {
@@ -530,41 +540,22 @@ let store = new vuex.Store({
       state.visits[state.interfaceWeek][cellData.columnN][cellData.studentN] = state.arrayOfValuesCel[(num + 1) % 3]
     },
     ChangeActiveColumn(state, columnN) {
-      if (state.waiting == 'transfer') {
-
-        let columnT = 'column'
-        if (String(state.transferColumn).length == 1) {
-          columnT += 0
-        }
-        columnT += state.transferColumn
-
-        let columnNN = 'column'
-        if (String(columnN).length == 1) {
-          columnNN += 0
-        }
-        columnNN += columnN
-
-        console.log('columnNN', columnNN)
-        console.log('columnT', columnT)
-        console.log('state.visits[state.interfaceWeek][columnNN]', state.visits[state.interfaceWeek][columnNN])
-
-        for (let key in state.visits[state.interfaceWeek][columnNN]) {
-          console.log(key, state.visits[state.interfaceWeek][columnT][key])
-          state.visits[state.interfaceWeek][columnNN][key] = state.visits[state.interfaceWeek][columnT][key]
-        }
-        state.transferColumn = ''
-        state.waiting = ''
-        return
-      }
+      state.manyActiveColumn = []
       state.activeColumn = columnN
     },
     toActiveVisitTemplate(state) {
-      if (state.activeColumn != '') {
-        let columnN = 'column'
-        if (String(state.activeColumn).length == 1) {
-          columnN += 0
-        }
-        columnN += state.activeColumn 
+      if (state.manyActiveColumn.length != 0) {
+        const arr = state.manyActiveColumn
+        arr.forEach(function(item) {
+          let columnN = createColumnName(item)
+          for (let key in state.visits[state.interfaceWeek][columnN]) {
+            state.visits[state.interfaceWeek][columnN][key] = state.visitTemaplate[key]
+          }
+          state.manyActiveColumn = []
+        }); 
+      } else if (state.activeColumn != '') {
+        let columnN = createColumnName(state.activeColumn)
+
         for (let key in state.visits[state.interfaceWeek][columnN]) {
           state.visits[state.interfaceWeek][columnN][key] = state.visitTemaplate[key]
         }
@@ -578,6 +569,24 @@ let store = new vuex.Store({
         }
       }
     },
+    clickClearColumn(state) {
+      if (state.manyActiveColumn.length != 0) {
+        const arr = state.manyActiveColumn
+        arr.forEach(function(item) {
+          let columnN = createColumnName(item)
+          for (let key in state.visits[state.interfaceWeek][columnN]) {
+            state.visits[state.interfaceWeek][columnN][key] = 'n'
+          }
+          state.manyActiveColumn = []
+        }); 
+      } else if (state.activeColumn != '') {
+        let columnN = createColumnName(state.activeColumn)
+        for (let key in state.visits[state.interfaceWeek][columnN]) {
+          state.visits[state.interfaceWeek][columnN][key] = 'n'
+        }
+        state.activeColumn = ''
+      }
+    },
     toTransferColumn(state) {
       if (state.activeColumn != '') {
         state.transferColumn = state.activeColumn
@@ -585,8 +594,67 @@ let store = new vuex.Store({
         state.waiting = 'transfer'
       }
     },
+    toFill(state) {
+      if (state.manyActiveColumn.length != 0) {
+        const columnT = createColumnName(state.transferColumn)
+        const arr = state.manyActiveColumn
+        arr.forEach(function(item) {
+          const columnN = createColumnName(item)
+          for (let key in state.visits[state.interfaceWeek][columnN]) {
+            state.visits[state.interfaceWeek][columnN][key] = state.visits[state.interfaceWeek][columnT][key]
+          }
+          state.manyActiveColumn = []
+        }); 
+      } else if (state.activeColumn != '') {
+        const columnT = createColumnName(state.transferColumn)
+        const columnN = createColumnName(state.activeColumn)
+        for (let key in state.visits[state.interfaceWeek][columnN]) {
+          state.visits[state.interfaceWeek][columnN][key] = state.visits[state.interfaceWeek][columnT][key]
+        }
+        state.activeColumn = ''
+      }
+    },
     updateVisits(state, serverData) {
       state.visits[state.interfaceWeek] = serverData
+    },
+    columnSelection(state, columnN) {
+      if (state.activeColumn != '' && state.manyActiveColumn.length == 0) {
+        const a = state.activeColumn
+        state.activeColumn = ''
+        let tempArray = []
+        if (a < columnN) {
+          for (let i = a; i <= columnN; i++) {
+            tempArray.push(i)
+            state.manyActiveColumn = tempArray
+          }
+        } else if (a > columnN) {
+          for (let i = columnN; i <= a; i++) {
+            tempArray.push(i)
+            state.manyActiveColumn = tempArray
+          }
+        }
+      } else if (state.manyActiveColumn.length == 0) {
+        state.activeColumn = ''
+        state.manyActiveColumn.push(columnN)
+      } else if (state.manyActiveColumn.length == 1) {
+        state.activeColumn = ''
+        const a = state.manyActiveColumn[0]
+        let tempArray = []
+        if (a < columnN) {
+          for (let i = a; i <= columnN; i++) {
+            tempArray.push(i)
+            state.manyActiveColumn = tempArray
+          }
+        } else if (a > columnN) {
+          for (let i = columnN; i <= a; i++) {
+            tempArray.push(i)
+            state.manyActiveColumn = tempArray
+          }
+        }
+      } else {
+        state.manyActiveColumn = []
+        state.activeColumn = ''
+      }
     }
   },
   actions: {
@@ -620,6 +688,12 @@ let store = new vuex.Store({
     ACTIVECOLUMN(state) {
       return state.activeColumn
     },
+    TRANSFERCOLUMN(state) {
+      return state.transferColumn
+    },
+    MANY_ACTIVE_COLUMN(state) {
+      return state.manyActiveColumn
+    },
     VISIT_IN_CELL: state => (dataN) => {
       return state.visits[state.interfaceWeek][dataN.columnN][dataN.studentN]
     },
@@ -628,7 +702,13 @@ let store = new vuex.Store({
     },
     VISITS(state) {
       return state.visits[state.interfaceWeek]
-    }
+    },
+    GEN_SUBJECTS(state) {
+      return state.generSubjects
+    },
+    GEN_STUDENTS(state){
+      return state.generStudents
+    },
   },
   modules: {
     auth,

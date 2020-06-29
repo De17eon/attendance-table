@@ -1,14 +1,17 @@
 <template>
   <div 
     class="v-table-presence-column"
-    :class="{'v-table-presence-column__active': parseInt(columnN.match(/\d+/)) == ACTIVECOLUMN}"
+    :class="{
+      'v-table-presence-column__active': parseInt(columnN.match(/\d+/)) == ACTIVECOLUMN,
+      'v-table-presence-column__transfer': parseInt(columnN.match(/\d+/)) == TRANSFERCOLUMN,
+      'v-table-presence-column__manyactive': MANY_ACTIVE_COLUMN.includes(parseInt(columnN.match(/\d+/)))         
+    }"
   >
     <v-table-presence-column-cell 
       v-for="(val, studentN, index) in column" 
       :key="index" 
       :studentN="studentN"
       :columnN="columnN"
-      
     />
   </div>
 </template>
@@ -25,11 +28,11 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'ACTIVECOLUMN'
+      'ACTIVECOLUMN',
+      'TRANSFERCOLUMN',
+      'MANY_ACTIVE_COLUMN'
     ]),
   },
-  methods: {
-  }
 }
 </script>
 
@@ -45,5 +48,12 @@ export default {
 .v-table-presence-column__active {
   border-left: 2px solid orange;
   border-right: 2px solid orange;
+}
+.v-table-presence-column__transfer {
+  border-left: 2px solid rgb(28, 144, 190);
+  border-right: 2px solid rgb(28, 144, 190);
+}
+.v-table-presence-column__manyactive {
+  background-color: #e9ecef;
 }
 </style>
