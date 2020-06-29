@@ -23,7 +23,6 @@ let store = new vuex.Store({
     activeColumn: '',
     manyActiveColumn: [],
     transferColumn: '',
-    // waiting: '',
     arrayOfValuesCel: ['n', 'y', 'r'], 
     subjects: [
       {
