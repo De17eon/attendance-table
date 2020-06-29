@@ -1,4 +1,4 @@
-# bubun-attendance
+# attendance
 
 ## Project setup
 ```
